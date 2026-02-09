@@ -150,5 +150,67 @@
             const container = document.getElementById('heart-container');
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.innerHTML
-            
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            container.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+
+        function startFlowerRain() {
+            setInterval(() => {
+                confetti({
+                    particleCount: 3, angle: 60, spread: 55, origin: { x: 0, y: 0.8 },
+                    colors: ['#d63384', '#ff69b4', '#ffffff']
+                });
+                confetti({
+                    particleCount: 3, angle: 120, spread: 55, origin: { x: 1, y: 0.8 },
+                    colors: ['#d63384', '#ff69b4', '#ffffff']
+                });
+            }, 150);
+            setInterval(createHeart, 400); 
+        }
+
+        function unlock() {
+            document.getElementById('lock-screen').style.transform = "translateY(-100%)";
+            song.play().catch(error => {
+                console.log("Audio play failed. Most browsers need a click interaction first.");
+            });
+            startFlowerRain();
+            initTypewriters();
+        }
+
+        function nextPage(nextId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(nextId).classList.add('active');
+            if(nextId === 'p2') startCounter();
+        }
+
+        function startCounter() {
+            let count = 0;
+            const timer = setInterval(() => {
+                count += 167;
+                if(count >= 9999) {
+                    document.getElementById('counter').innerText = "9999+";
+                    clearInterval(timer);
+                } else { document.getElementById('counter').innerText = count; }
+            }, 30);
+        }
+
+        function moveNo() {
+            const btn = document.getElementById('no-btn');
+            btn.style.position = 'fixed';
+            btn.style.top = Math.random() * 80 + 'vh';
+            btn.style.left = Math.random() * 80 + 'vw';
+        }
+
+        function toggleMusic() { song.paused ? song.play() : song.pause(); }
+
+        function initTypewriters() {
+            new Typewriter('#type1', { strings: ['Wishing you a very Happy Birthday Bhabhi Ji!', 'May your special day be filled with endless joy.'], autoStart: true, loop: true });
+            new Typewriter('#type3', { strings: ['May Radha Rani shower her infinite grace on you.', 'May your life be filled with divine peace and love.'], autoStart: true, loop: true });
+            new Typewriter('#type5', { strings: ['Wishing you the happiest of birthdays!', 'May all your dreams turn into reality this year! 🎉'], autoStart: true, loop: true });
+        }
+    </script>
+</body>
+</html>
