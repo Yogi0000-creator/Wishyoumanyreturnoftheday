@@ -10,23 +10,20 @@
         
         /* Lock Screen Style */
         #lock-screen {
-            position: fixed; width: 100%; height: 100vh; background: #d63384; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #d63384; 
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 9999; color: white; text-align: center; transition: 0.8s;
+            z-index: 9999; color: white; text-align: center; transition: transform 0.8s ease-in-out;
         }
         .lock-box { background: white; padding: 30px; border-radius: 20px; color: #d63384; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 80%; max-width: 400px; }
         .party-btns { display: flex; gap: 20px; justify-content: center; margin-top: 20px; }
         .btn-party { padding: 10px 30px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; }
         .yes { background: #d63384; color: white; }
-        .no { background: #eee; color: #555; }
-        .no:hover { transform: translateX(50px); opacity: 0.5; } /* "No" button moves away or fades */
+        .no { background: #eee; color: #555; position: relative; }
 
-        section { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; position: relative; border-bottom: 2px solid #ffdde1; }
+        section { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; border-bottom: 2px solid #ffdde1; }
         h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #d63384; margin-bottom: 20px; }
-        .typewriter { font-size: 1.3rem; color: #555; min-height: 3rem; max-width: 600px; line-height: 1.6; }
-        .bg-1 { background: #ffeef2; } .bg-2 { background: #fff0f5; } .bg-3 { background: #fce4ec; }
-        .bg-4 { background: #f8bbd0; } .bg-5 { background: #f48fb1; } .bg-6 { background: #f06292; color: white; }
-        .btn-next { margin-top: 30px; padding: 12px 25px; background: #d63384; color: white; border: none; border-radius: 30px; cursor: pointer; text-decoration: none; font-weight: bold; }
+        .typewriter { font-size: 1.3rem; color: #555; min-height: 3rem; max-width: 600px; }
+        .btn-next { margin-top: 30px; padding: 12px 25px; background: #d63384; color: white; border: none; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; }
         .music-control { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255,255,255,0.9); padding: 12px; border-radius: 50%; cursor: pointer; }
     </style>
 </head>
@@ -38,10 +35,83 @@
             <p>Pahle party milegi? Yes or No?</p>
             <div class="party-btns">
                 <button class="btn-party yes" onclick="unlock()">YES! ✅</button>
-                <button class="btn-party no" onmouseover="moveNo(this)">NO ❌</button>
+                <button class="btn-party no" onmouseover="moveNo(this)" onclick="moveNo(this)">NO ❌</button>
             </div>
         </div>
     </div>
 
-    <audio id="bdaySong" loop>
-        <source src="
+    <audio id="bdaySong" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-control" onclick="toggleMusic()">🎵</div>
+
+    <section class="bg-1" style="background: #ffeef2;">
+        <h1>Happy Birthday Bhabhi Ji! 🎂</h1>
+        <div class="typewriter" id="type1"></div>
+        <a href="#page2" class="btn-next">Start the Journey ✨</a>
+    </section>
+
+    <section id="page2" style="background: #fff0f5;">
+        <h1>A Special Wish... 🌸</h1>
+        <div class="typewriter" id="type2"></div>
+        <a href="#page3" class="btn-next">Next Message ➡️</a>
+    </section>
+
+    <section id="page3" style="background: #fce4ec;">
+        <h1>For Someone Amazing ✨</h1>
+        <div class="typewriter" id="type3"></div>
+        <a href="#page4" class="btn-next">Keep Scrolling ❤️</a>
+    </section>
+
+    <section id="page4" style="background: #f8bbd0;">
+        <h1>Life & Happiness 👑</h1>
+        <div class="typewriter" id="type4"></div>
+        <a href="#page5" class="btn-next">Almost there...</a>
+    </section>
+
+    <section id="page5" style="background: #f48fb1;">
+        <h1>Priceless Moments 🌟</h1>
+        <div class="typewriter" id="type5"></div>
+        <a href="#page6" class="btn-next">The Final Note...</a>
+    </section>
+
+    <section id="page6" style="background: #f06292; color: white;">
+        <h1>Always Be Happy! ❤️</h1>
+        <div class="typewriter" id="type6" style="color: white;"></div>
+        <p style="margin-top: 50px;">Made with ❤️ for You</p>
+    </section>
+
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <script>
+        const song = document.getElementById("bdaySong");
+        
+        function unlock() {
+            // Screen ko hatane ke liye transform aur opacity ka use
+            const lock = document.getElementById('lock-screen');
+            lock.style.transform = "translateY(-100%)";
+            setTimeout(() => { lock.style.display = "none"; }, 800);
+            
+            // Music ko play karne ki koshish
+            song.play().catch(e => console.log("Music play failed:", e));
+        }
+
+        function moveNo(btn) {
+            btn.style.position = 'fixed';
+            btn.style.top = Math.random() * 70 + 15 + 'vh';
+            btn.style.left = Math.random() * 70 + 15 + 'vw';
+        }
+
+        function toggleMusic() {
+            if (song.paused) { song.play(); } else { song.pause(); }
+        }
+
+        // Typewriter Sequences
+        new Typewriter('#type1', { strings: ['May your day be as bright as your smile.', 'Sending you all the love and joy today!'], autoStart: true, loop: true });
+        new Typewriter('#type2', { strings: ['Radha Rani bless you with infinite happiness.', 'May her divine grace always be with you.'], autoStart: true, loop: true });
+        new Typewriter('#type3', { strings: ['Wishing you a year full of new adventures.', 'May every dream of yours come true.'], autoStart: true, loop: true });
+        new Typewriter('#type4', { strings: ['You are not just family, you are a blessing.', 'Thank you for being such a wonderful soul.'], autoStart: true, loop: true });
+        new Typewriter('#type5', { strings: ['May your life be filled with laughter and peace.', 'Keep spreading the positivity everywhere!'], autoStart: true, loop: true });
+        new Typewriter('#type6', { strings: ['Have the most wonderful day ever!', 'Enjoy every moment of your special day! 🎉'], autoStart: true, loop: true });
+    </script>
+</body>
+</html>
