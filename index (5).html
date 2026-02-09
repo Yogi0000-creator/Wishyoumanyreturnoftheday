@@ -1,0 +1,86 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Bhabhi Ji! ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; overflow-x: hidden; background: #fff5f7; }
+        section { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; position: relative; border-bottom: 2px solid #ffdde1; }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: #d63384; margin-bottom: 20px; }
+        .typewriter { font-size: 1.5rem; color: #555; min-height: 3rem; max-width: 600px; }
+        .bg-1 { background: #ffeef2; } .bg-2 { background: #fff0f5; } .bg-3 { background: #fce4ec; }
+        .bg-4 { background: #f8bbd0; } .bg-5 { background: #f48fb1; } .bg-6 { background: #f06292; color: white; }
+        .btn-next { margin-top: 30px; padding: 10px 20px; background: #d63384; color: white; border: none; border-radius: 25px; cursor: pointer; text-decoration: none; transition: 0.3s; }
+        .music-control { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 10px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <audio id="bdaySong" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-control" onclick="toggleMusic()">🎵</div>
+
+    <section class="bg-1">
+        <h1>Happy Birthday Bhabhi Ji! 🎂</h1>
+        <div class="typewriter" id="type1"></div>
+        <a href="#page2" class="btn-next">Click to see more ✨</a>
+    </section>
+
+    <section id="page2" class="bg-2">
+        <h1>A Small Surprise... 🎁</h1>
+        <div class="typewriter" id="type2"></div>
+        <a href="#page3" class="btn-next">Next Memory ➡️</a>
+    </section>
+
+    <section id="page3" class="bg-3">
+        <h1>You are Special ✨</h1>
+        <div class="typewriter" id="type3"></div>
+        <a href="#page4" class="btn-next">Scroll for More ❤️</a>
+    </section>
+
+    <section id="page4" class="bg-4">
+        <h1>Best Bhabhi Ever 👑</h1>
+        <div class="typewriter" id="type4"></div>
+        <a href="#page5" class="btn-next">Almost there...</a>
+    </section>
+
+    <section id="page5" class="bg-5">
+        <h1>My Wishes for You 🌟</h1>
+        <div class="typewriter" id="type5"></div>
+        <a href="#page6" class="btn-next">One Last Thing...</a>
+    </section>
+
+    <section id="page6" class="bg-6">
+        <h1>Stay Blessed Always! ❤️</h1>
+        <div class="typewriter" id="type6" style="color: white;"></div>
+        <p style="margin-top: 50px;">Made with ❤️ by [Your Name]</p>
+    </section>
+
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <script>
+        const song = document.getElementById("bdaySong");
+        
+        // Function to start music (Browser policy needs user interaction)
+        function toggleMusic() {
+            if (song.paused) { song.play(); } else { song.pause(); }
+        }
+
+        // Start playing music on first click anywhere
+        document.body.addEventListener('click', () => {
+            song.play();
+        }, { once: true });
+
+        // Typewriter Sequences
+        new Typewriter('#type1', { strings: ['Aapke is janm-din par meri dua hai ki aap hamesha muskurati rahein.', 'Life ka har din aapke liye khushiyan laye.'], autoStart: true, loop: true });
+        new Typewriter('#type2', { strings: ['Door hoon par mera aashirwad aur wishes hamesha aapke saath hain.', 'Aap sirf bhabhi nahi, meri sabse achi dost hain!'], autoStart: true, loop: true });
+        new Typewriter('#type3', { strings: ['Khuda aapki har khwaish poori kare...', 'May your year be filled with love and laughter.'], autoStart: true, loop: true });
+        new Typewriter('#type4', { strings: ['Ghar ki rounak aap se hai, aapki smile sabka din bana deti hai.', 'Keep shining like a star!'], autoStart: true, loop: true });
+        new Typewriter('#type5', { strings: ['Hamesha aise hi rehna, cool aur sabki favourite.', 'Have an amazing day filled with cakes and gifts!'], autoStart: true, loop: true });
+        new Typewriter('#type6', { strings: ['Happy Birthday once again Bhabhi Ji!', 'Party pending hai jab hum milenge! 🍰🎉'], autoStart: true, loop: true });
+    </script>
+</body>
+</html>
