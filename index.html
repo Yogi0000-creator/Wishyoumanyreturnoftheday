@@ -12,16 +12,13 @@
         :root { --primary: #d63384; }
         body, html { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; overflow: hidden; background: linear-gradient(135deg, #fce4ec 0%, #ffdde1 100%); height: 100%; }
 
-        /* Floating Hearts */
         .heart { position: absolute; color: rgba(214, 51, 132, 0.4); font-size: 20px; animation: floatUp 6s linear infinite; bottom: -20px; z-index: 1; pointer-events: none; }
         @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
 
-        /* Running Text */
         .marquee { position: fixed; top: 0; width: 100%; background: var(--primary); color: white; padding: 10px 0; z-index: 100; overflow: hidden; white-space: nowrap; }
         .marquee span { display: inline-block; padding-left: 100%; animation: marquee 15s linear infinite; font-size: 1.1rem; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* Lock Screen */
         #lock-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--primary); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: 0.8s ease; }
         .lock-box { background: white; padding: 30px; border-radius: 25px; color: var(--primary); text-align: center; width: 85%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
@@ -29,7 +26,7 @@
         .active { display: flex; animation: fadeIn 0.8s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
-        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); padding: 30px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 85%; max-width: 500px; position: relative; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); padding: 30px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 85%; max-width: 500px; }
 
         h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: var(--primary); margin: 10px 0; }
         .btn-next, .btn-party { margin-top: 20px; padding: 12px 30px; background: var(--primary); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; }
@@ -37,14 +34,13 @@
         #no-btn { background: #eee; color: #555; position: relative; }
         #counter { font-size: 4.5rem; font-weight: 700; color: var(--primary); }
 
-        /* Bhabhi Photo Style */
-        .bhabhi-photo {
-            width: 180px; height: 180px; border-radius: 50%;
-            border: 5px solid var(--primary); object-fit: cover;
-            margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
+        /* Cake Style */
+        .cake-container { cursor: pointer; transition: 0.3s; margin: 20px 0; font-size: 80px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); }
+        .cake-container:hover { transform: scale(1.1); }
+        .instruction { font-size: 0.9rem; color: #888; margin-top: 10px; font-style: italic; }
 
-        /* Camera Box */
+        .bhabhi-photo { width: 180px; height: 180px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
         #video-container { position: relative; width: 100%; max-width: 320px; height: 240px; margin: 15px auto; border-radius: 20px; overflow: hidden; border: 4px solid var(--primary); background: #000; }
         video { width: 100%; height: 100%; object-fit: cover; }
         #crown-img { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 100px; display: none; z-index: 20; }
@@ -55,15 +51,15 @@
 <body>
 
     <div id="heart-container"></div>
-    <div class="marquee"><span>✨ Happy Birthday Bhabhi Ji! ✨ Radha Rani Bless You! ✨ Happy Birthday Bhabhi Ji! ✨ Radha Rani Bless You! ✨</span></div>
+    <div class="marquee"><span>✨ Happy Birthday Bhabhi Ji! ✨ Radha Rani Bless You! ✨ Party On! ✨</span></div>
 
     <audio id="bdaySong" loop><source src="https://www.dropbox.com/scl/fi/u4iktsxems4xwimxdikcy/Happy-Birthday-Song-1.mp3?rlkey=niijrtehe1pm1ysjobq8kra6f&st=7symiowt&dl=1" type="audio/mpeg"></audio>
 
     <div id="lock-screen">
         <div class="lock-box">
-            <h1 style="font-size: 2.5rem;">Wait! 🛑</h1>
-            <p style="font-size: 1.1rem; color: #555;">Pahle party milegi? Yes or No?</p>
-            <div style="display:flex; gap:15px; justify-content:center; margin-top:10px;">
+            <h1>Wait! 🛑</h1>
+            <p>Pahle party milegi? Yes or No?</p>
+            <div style="display:flex; gap:15px; justify-content:center;">
                 <button class="btn-party" onclick="unlock()">YES! ✅</button>
                 <button id="no-btn" class="btn-party" onmouseover="moveNo()">NO ❌</button>
             </div>
@@ -75,7 +71,7 @@
     <div id="p1" class="page active">
         <div class="glass-card">
             <h1>Happy Birthday! 🎂</h1>
-            <div id="type1" class="typewriter" style="font-size: 1.2rem; min-height: 4rem;"></div>
+            <div id="type1" class="typewriter" style="min-height: 4rem;"></div>
             <button class="btn-next" onclick="nextPage('p2')">Start Journey ✨</button>
         </div>
     </div>
@@ -84,7 +80,7 @@
         <div class="glass-card">
             <h1>Infinite Respect ❤️</h1>
             <div id="counter">0</div>
-            <p>Reasons why you are the best Bhabhi!</p>
+            <p>Reasons why you're the best!</p>
             <button class="btn-next" onclick="nextPage('p3')">Next Surprise ➡️</button>
         </div>
     </div>
@@ -92,7 +88,6 @@
     <div id="p3" class="page">
         <div class="glass-card">
             <h1>Birthday Queen 👑</h1>
-            <p>Look in the mirror, Your Majesty!</p>
             <div id="video-container">
                 <video id="webcam" autoplay playsinline></video>
                 <img id="crown-img" src="https://img.icons8.com/emoji/96/000000/crown-emoji.png">
@@ -104,9 +99,10 @@
 
     <div id="p4" class="page">
         <div class="glass-card">
-            <h1>Divine Blessings 🌸</h1>
-            <div id="type3" class="typewriter" style="font-size: 1.2rem; min-height: 4rem;"></div>
-            <button class="btn-next" onclick="nextPage('p5')">The Best Part ❤️</button>
+            <h1>Cake Cutting Time! 🍰</h1>
+            <p>Tap on the cake to cut it!</p>
+            <div class="cake-container" id="cake" onclick="cutCake()">🎂</div>
+            <div class="instruction">Click the cake to see the magic!</div>
         </div>
     </div>
 
@@ -114,12 +110,11 @@
         <div class="glass-card">
             <img src="https://www.dropbox.com/scl/fi/jmwo0lftnmho1pkg5xdw7/1770607961130.jpg?rlkey=n3dnkzhl51oroq9558x14vssk&st=yswiaefm&dl=1" alt="Bhabhi Ji" class="bhabhi-photo">
             <h1 style="font-size: 2.2rem;">Happy Birthday Bhabhi Ji! 🥳</h1>
-            <p style="font-size: 1.2rem; color: #d63384; font-weight: 600; line-height: 1.5;">
+            <p style="font-size: 1.2rem; color: #d63384; font-weight: 600;">
                 Radha Rani bless you. <br>
                 Aap hmesa happy rho. <br>
                 Happiest Birthday! 🎉
             </p>
-            <p style="margin-top:20px; font-size:0.8rem; color:#888;">Made with ❤️ for You</p>
         </div>
     </div>
 
@@ -149,16 +144,18 @@
             initTypewriters();
         }
 
+        function cutCake() {
+            const cake = document.getElementById('cake');
+            cake.innerHTML = '🍰✨'; // Cake cut effect
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            setTimeout(() => { nextPage('p5'); }, 1000); // 1 sec baad photo page
+        }
+
         function nextPage(nextId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(nextId).classList.add('active');
             if (nextId === 'p2') startCounter();
-            if (nextId === 'p5') {
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            }
-            if (nextId !== 'p3' && video.srcObject) {
-                video.srcObject.getTracks().forEach(track => track.stop());
-            }
+            if (nextId !== 'p3' && video.srcObject) { video.srcObject.getTracks().forEach(track => track.stop()); }
         }
 
         async function startCamera() {
@@ -166,7 +163,7 @@
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 video.srcObject = stream;
                 crown.style.display = 'block';
-            } catch (err) { alert("Camera access denied! No worries, you're still a Queen!"); }
+            } catch (err) { alert("Camera access denied!"); }
         }
 
         function startCounter() {
@@ -188,8 +185,7 @@
         function toggleMusic() { song.paused ? song.play() : song.pause(); }
 
         function initTypewriters() {
-            new Typewriter('#type1', { strings: ['Wishing you a very Happy Birthday!', 'Time to celebrate your special day!'], autoStart: true, loop: true });
-            new Typewriter('#type3', { strings: ['May Radha Rani shower her infinite grace on you.', 'Keep smiling and stay blessed forever!'], autoStart: true, loop: true });
+            new Typewriter('#type1', { strings: ['Wishing you a very Happy Birthday!', 'Ready for the celebration?'], autoStart: true, loop: true });
         }
     </script>
 </body>
