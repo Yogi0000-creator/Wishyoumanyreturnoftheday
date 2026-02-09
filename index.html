@@ -3,141 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Grand Birthday Surprise ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>The Royal Birthday Celebration ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 
     <style>
-        :root { --primary: #d63384; --gold: #ffd700; --soft-pink: #fce4ec; }
+        :root { --primary: #d63384; --gold: #ffd700; }
         body, html { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; overflow: hidden; background: linear-gradient(135deg, #fce4ec 0%, #ffdde1 100%); height: 100%; }
 
-        /* Sparkle Effect */
-        .sparkle { position: absolute; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 10000; animation: sparkleAnim 0.8s linear forwards; }
-        @keyframes sparkleAnim { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }
+        /* Floating Balloons */
+        .balloon { position: absolute; font-size: 30px; animation: flyUp 8s linear infinite; bottom: -50px; z-index: 1; opacity: 0.6; }
+        @keyframes flyUp { 0% { transform: translateY(0) rotate(0); } 100% { transform: translateY(-120vh) rotate(20deg); } }
 
-        .heart { position: absolute; color: rgba(214, 51, 132, 0.4); font-size: 20px; animation: floatUp 6s linear infinite; bottom: -20px; z-index: 1; }
-        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+        /* Envelope Style */
+        .envelope-wrapper { cursor: pointer; perspective: 1000px; margin: 20px 0; }
+        .envelope { width: 150px; height: 100px; background: #fff; border: 2px solid var(--primary); position: relative; display: flex; align-items: center; justify-content: center; font-size: 40px; border-radius: 5px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.5s; }
+        .envelope:hover { transform: rotateX(20deg); }
+        .letter { display: none; background: #fff9c4; padding: 20px; border-radius: 10px; font-family: 'Caveat', cursive; font-size: 1.5rem; color: #333; box-shadow: 0 5px 15px rgba(0,0,0,0.1); animation: popIn 0.5s forwards; }
 
-        .marquee { position: fixed; top: 0; width: 100%; background: var(--primary); color: white; padding: 10px 0; z-index: 100; overflow: hidden; white-space: nowrap; }
-        .marquee span { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; font-size: 1.1rem; }
+        /* Rest of the UI */
+        .marquee { position: fixed; top: 0; width: 100%; background: var(--primary); color: white; padding: 10px 0; z-index: 100; overflow: hidden; }
+        .marquee span { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* Lock Screen */
         #lock-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--primary); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: 0.8s ease; }
-        .lock-box { background: white; padding: 35px; border-radius: 30px; text-align: center; width: 85%; max-width: 400px; box-shadow: 0 15px 40px rgba(0,0,0,0.25); }
-        #cd-number { font-size: 6rem; font-weight: bold; display: none; color: var(--primary); }
-
-        /* Page Layout */
-        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; box-sizing: border-box; z-index: 10; }
+        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; box-sizing: border-box; }
         .active { display: flex; animation: fadeIn 0.8s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); padding: 35px; border-radius: 35px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 20px 45px rgba(0,0,0,0.1); width: 85%; max-width: 500px; }
-        
-        h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: var(--primary); margin: 10px 0; }
-        .wish-text { font-size: 1.1rem; color: #444; line-height: 1.6; margin: 15px 0; font-style: italic; }
-        
-        .btn-next, .btn-party { margin-top: 25px; padding: 15px 35px; background: var(--primary); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; box-shadow: 0 5px 15px rgba(214,51,132,0.4); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 30px; border-radius: 30px; width: 85%; max-width: 500px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--primary); font-size: 2.5rem; }
+        .btn-next { margin-top: 20px; padding: 12px 30px; background: var(--primary); color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; }
 
-        /* Image & Video */
-        .bhabhi-photo { width: 190px; height: 190px; border-radius: 50%; border: 6px solid var(--primary); object-fit: cover; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        #video-container { position: relative; width: 100%; max-width: 300px; height: 250px; margin: 15px auto; border-radius: 20px; overflow: hidden; border: 4px solid var(--primary); background: #000; }
+        .bhabhi-photo { width: 180px; height: 180px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; margin-bottom: 20px; }
+        #video-container { width: 100%; max-width: 300px; height: 250px; margin: 15px auto; border-radius: 20px; overflow: hidden; border: 4px solid var(--primary); position: relative; background: #000; }
         video { width: 100%; height: 100%; object-fit: cover; }
-        #crown-img { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 100px; display: none; z-index: 20; }
-
-        .music-control { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--primary); }
+        #crown-img { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 100px; display: none; }
     </style>
 </head>
 <body onclick="createSparkle(event)">
 
-    <div id="heart-container"></div>
-    <div class="marquee"><span>✨ Happy Birthday Bhabhi Ji! ✨ Radha Rani Bless You! ✨ Happiness, Success, and Love Forever! ✨ Stay Blessed! ✨</span></div>
+    <div id="balloon-container"></div>
+    <div class="marquee"><span>✨ Happy Birthday Bhabhi Ji! ✨ Radha Rani Bless You! ✨ Happiness, Success, and Love Forever! ✨</span></div>
 
     <audio id="bdaySong" loop><source src="https://www.dropbox.com/scl/fi/u4iktsxems4xwimxdikcy/Happy-Birthday-Song-1.mp3?rlkey=niijrtehe1pm1ysjobq8kra6f&st=7symiowt&dl=1" type="audio/mpeg"></audio>
 
     <div id="lock-screen">
-        <div class="lock-box" id="lock-content">
-            <h1>Special Gift Box 🎁</h1>
-            <p>Ready to unlock your Birthday Journey?</p>
-            <button class="btn-party" onclick="startCountdown()">YES, LET'S GO! 🚀</button>
+        <div class="glass-card" id="lock-content" style="text-align:center;">
+            <h1>Open Your Gift 🎁</h1>
+            <p>10 Second Countdown to Magic!</p>
+            <button class="btn-next" onclick="startCountdown()">UNWRAP SURPRISE 🚀</button>
         </div>
-        <div id="cd-number">10</div>
+        <div id="cd-number" style="font-size:6rem; color:white; display:none;">10</div>
     </div>
-
-    <div class="music-control" onclick="toggleMusic()">🎵</div>
 
     <div id="p1" class="page active">
         <div class="glass-card">
-            <h1>Hey Bhabhi Ji! 🌸</h1>
+            <h1>Dear Bhabhi Ji... 🌸</h1>
             <div id="type1" style="min-height: 4rem;"></div>
-            <button class="btn-next" onclick="nextPage('p2')">Start the Adventure ✨</button>
-        </div>
-    </div>
-
-    <div id="p2" class="page">
-        <div class="glass-card">
-            <h1>Infinite Love ❤️</h1>
-            <div id="counter" style="font-size: 5rem; font-weight: bold; color: var(--primary);">0</div>
-            <p>Reasons why you are our favorite!</p>
-            <button class="btn-next" onclick="nextPage('p3')">Next Surprise ➡️</button>
+            <button class="btn-next" onclick="nextPage('p2')">Continue ➡️</button>
         </div>
     </div>
 
     <div id="p3" class="page">
         <div class="glass-card">
-            <h1>Birthday Queen 👑</h1>
+            <h1>The Real Queen 👑</h1>
             <div id="video-container">
                 <video id="webcam" autoplay playsinline></video>
                 <img id="crown-img" src="https://img.icons8.com/emoji/96/000000/crown-emoji.png">
             </div>
-            <button class="btn-next" onclick="startCamera()">See the Queen 📸</button>
+            <button class="btn-next" onclick="startCamera()">Reveal Crown 📸</button>
             <button class="btn-next" onclick="nextPage('p4')">Next Wish ➡️</button>
         </div>
     </div>
 
     <div id="p4" class="page">
         <div class="glass-card">
-            <h1>Success & Growth 🌟</h1>
-            <p class="wish-text">"May this year bring you closer to your dreams. May your hard work always shine and lead you to great success!"</p>
-            <button class="btn-next" onclick="nextPage('p5')">One More Wish ✨</button>
+            <h1>A Secret Note ✉️</h1>
+            <div class="envelope-wrapper" id="env-wrap" onclick="openLetter()">
+                <div class="envelope" id="env">💌</div>
+            </div>
+            <div class="letter" id="letter-text">
+                "You are not just a Bhabhi, you are like a sister and a guide. On your birthday, I just want to say thank you for being so amazing. May Radha Rani fill your life with colors!"
+            </div>
+            <button class="btn-next" id="letter-btn" style="display:none;" onclick="nextPage('p5')">One More Thing... ✨</button>
         </div>
     </div>
 
     <div id="p5" class="page">
         <div class="glass-card">
-            <h1>Divine Grace 🌸</h1>
-            <p class="wish-text">"May Radha Rani always protect you and shower her divine love. May your home be filled with peace and harmony."</p>
-            <button class="btn-next" onclick="nextPage('p6')">Something More... ✨</button>
+            <h1>Sweet Celebration 🍰</h1>
+            <p>Tap the cake to cut it!</p>
+            <div id="cake" style="font-size: 100px; cursor: pointer;" onclick="cutCake()">🎂</div>
         </div>
     </div>
 
     <div id="p6" class="page">
         <div class="glass-card">
-            <h1>Health & Smiles 😊</h1>
-            <p class="wish-text">"I wish for your health to be robust and your smile to be everlasting. Never let that beautiful smile fade away!"</p>
-            <button class="btn-next" onclick="nextPage('p7')">The Last Surprise ✨</button>
-        </div>
-    </div>
-
-    <div id="p7" class="page">
-        <div class="glass-card">
-            <h1>Make a Wish! 🍰</h1>
-            <p>Click the cake to celebrate!</p>
-            <div id="cake" style="font-size: 100px; cursor: pointer;" onclick="cutCake()">🎂</div>
-            <p style="color: #888;">Tap tap tap!</p>
-        </div>
-    </div>
-
-    <div id="p8" class="page">
-        <div class="glass-card">
             <img src="https://www.dropbox.com/scl/fi/jmwo0lftnmho1pkg5xdw7/1770607961130.jpg?rlkey=n3dnkzhl51oroq9558x14vssk&st=yswiaefm&dl=1" alt="Bhabhi Ji" class="bhabhi-photo">
-            <h1 style="font-size: 2.2rem;">Happy Birthday! 🥳</h1>
-            <p style="font-size: 1.1rem; color: #d63384; font-weight: 600;">
-                Radha Rani bless you. <br> Aap hmesa happy rho. <br> 
-                Aap jaisa koi nahi! ❤️
+            <h1>Happiest Birthday! 🥳</h1>
+            <p style="font-size: 1.2rem; color: #d63384; font-weight: 600;">
+                Radha Rani bless you. <br> Aap hmesa happy rho. <br> Happy Birthday Bhabhi Ji! 🎉
             </p>
-            <button class="btn-next" style="background: #333;" onclick="location.reload()">Replay Surprise 🔄</button>
+            <button class="btn-next" style="background:#333;" onclick="location.reload()">Replay ❤️</button>
         </div>
     </div>
 
@@ -149,78 +118,64 @@
         function startCountdown() {
             song.play();
             document.getElementById('lock-content').style.display = 'none';
-            const cdDisplay = document.getElementById('cd-number');
-            cdDisplay.style.display = 'block';
+            const cd = document.getElementById('cd-number');
+            cd.style.display = 'block';
             let count = 10;
             const timer = setInterval(() => {
-                count--;
-                cdDisplay.innerText = count;
+                count--; cd.innerText = count;
                 if(count === 0) { clearInterval(timer); unlock(); }
             }, 1000);
         }
 
         function unlock() {
             document.getElementById('lock-screen').style.transform = "translateY(-100%)";
-            setInterval(() => {
-                confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0, y: 0.8 }, colors: ['#d63384', '#ffd700'] });
-                confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1, y: 0.8 }, colors: ['#d63384', '#ffd700'] });
-            }, 150);
-            setInterval(createHeart, 500);
+            setInterval(createBalloon, 1500);
             initTypewriters();
         }
 
-        function createSparkle(e) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.style.left = e.clientX + 'px';
-            sparkle.style.top = e.clientY + 'px';
-            document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 800);
+        function createBalloon() {
+            const b = document.createElement('div');
+            b.className = 'balloon';
+            b.innerHTML = ['🎈','💖','✨'][Math.floor(Math.random()*3)];
+            b.style.left = Math.random() * 100 + 'vw';
+            document.getElementById('balloon-container').appendChild(b);
+            setTimeout(() => b.remove(), 8000);
         }
 
-        function createHeart() {
-            const container = document.getElementById('heart-container');
-            const heart = document.createElement('div');
-            heart.classList.add('heart'); heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            container.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
+        function openLetter() {
+            document.getElementById('env').style.display = 'none';
+            document.getElementById('letter-text').style.display = 'block';
+            document.getElementById('letter-btn').style.display = 'inline-block';
+            confetti({ particleCount: 100, spread: 70 });
         }
 
         function cutCake() {
-            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+            confetti({ particleCount: 200, spread: 100 });
             document.getElementById('cake').innerHTML = '🍰✨';
-            setTimeout(() => { nextPage('p8'); }, 1500);
+            setTimeout(() => nextPage('p6'), 1500);
         }
 
-        function nextPage(nextId) {
+        function nextPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(nextId).classList.add('active');
-            if (nextId === 'p2') startCounter();
-            if (nextId !== 'p3' && video.srcObject) { video.srcObject.getTracks().forEach(track => track.stop()); }
+            document.getElementById(id).classList.add('active');
+            if(id !== 'p3' && video.srcObject) video.srcObject.getTracks().forEach(t => t.stop());
         }
 
         async function startCamera() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                video.srcObject = stream;
-                crown.style.display = 'block';
-            } catch (err) { alert("Camera not accessible!"); }
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream; crown.style.display = 'block';
         }
 
-        function startCounter() {
-            let count = 0;
-            const timer = setInterval(() => {
-                count += 167;
-                if(count >= 9999) { document.getElementById('counter').innerText = "9999+"; clearInterval(timer); }
-                else { document.getElementById('counter').innerText = count; }
-            }, 30);
+        function createSparkle(e) {
+            const s = document.createElement('div');
+            s.className = 'sparkle';
+            s.style.left = e.clientX + 'px'; s.style.top = e.clientY + 'px';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 800);
         }
-
-        function toggleMusic() { song.paused ? song.play() : song.pause(); }
 
         function initTypewriters() {
-            new Typewriter('#type1', { strings: ['Today is a very special day!', 'Because a Queen was born today!', 'Wishing you the happiest birthday Bhabhi Ji!'], autoStart: true, loop: true });
+            new Typewriter('#type1', { strings: ['Wishing you a day filled with laughter...', 'May your year be as wonderful as you are!'], autoStart: true, loop: true });
         }
     </script>
 </body>
